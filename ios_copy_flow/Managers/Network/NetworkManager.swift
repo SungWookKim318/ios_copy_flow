@@ -19,11 +19,6 @@ struct AlamofireManager {
     }()
 }
 
-enum APINetworkManager {
-    static let baseURL = "https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/2020-flo"
-    static let getsongURL = baseURL + "/song.json"
-}
-
 // default 헤더 생성
 enum AlamofireHeaders {
     static func createHeader() -> [String: String] {
@@ -74,32 +69,32 @@ class NetworkManager {
             completion(.failure(NetworkError.tokenInvalid))
         }
         
-        request = session.request("https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/2020-flo/song.json")
+        request = session.request(APINetworkManager.getSongs)
         request?.responseDecodable(of: NetworkMusicModel.self){ response in
             guard let song = response.value else {
-                print("no")
+                Log.crushOrError("Fail to get songlist - [\(String(describing: response.error))] \(response)")
                 return
             }
             completion(.success([song]))
         }
     }
     
-    func downloadFile(url: URL, useDefault: Bool = false, completion: @escaping () -> Void) {
+    func downloadFile(url: URL, downloadURL: URL, completion: @escaping () -> Void) {
         
     }
     
     private init() {
-        reachability = NetworkReachabilityManager(host: APINetworkManager.baseURL)
+        reachability = NetworkReachabilityManager(host: APINetworkManager.base)
         reachability.startListening { status in
             print("\(status)")
         }
         requestToken { [weak self] result in
             switch result{
             case .success(let tokenKey) :
-                print("get token - \(tokenKey)")
+                Log.info("get token - \(tokenKey)")
                 self?.session = Session(interceptor: self)
             case .failure(let error):
-                print("get Error \(error)")
+                Log.info("get Error \(error)")
             }
         }
     }

@@ -36,7 +36,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="167" y="88"/>
+            <point key="canvasLocation" x="86" y="87"/>
         </scene>
         <!--Play View Controller-->
         <scene sceneID="mX9-ZQ-Hiw">
@@ -49,10 +49,24 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="examplePlayer" translatesAutoresizingMaskIntoConstraints="NO" id="dgZ-9h-3g6">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZf-nN-hMI">
+                                <rect key="frame" x="112" y="630" width="204" height="66"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="204" id="FCJ-ab-HGj"/>
+                                    <constraint firstAttribute="height" constant="66" id="hdK-k1-5Xb"/>
+                                </constraints>
+                                <state key="normal" image="rectangle.and.pencil.and.ellipsis" catalog="system"/>
+                                <connections>
+                                    <action selector="TestAction:" destination="WjF-Wu-HI0" eventType="touchUpInside" id="CcI-sV-AUY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2Dw-Y6-rfc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="dZf-nN-hMI" firstAttribute="centerY" secondItem="2WE-Jf-Oje" secondAttribute="centerY" constant="200" id="KTW-ho-MWX"/>
+                            <constraint firstItem="dZf-nN-hMI" firstAttribute="centerX" secondItem="2WE-Jf-Oje" secondAttribute="centerX" id="Kfd-0T-Cup"/>
                             <constraint firstItem="dgZ-9h-3g6" firstAttribute="top" secondItem="2WE-Jf-Oje" secondAttribute="top" id="UNn-MT-pZ2"/>
                             <constraint firstItem="dgZ-9h-3g6" firstAttribute="leading" secondItem="2WE-Jf-Oje" secondAttribute="leading" id="bE4-WT-yUu"/>
                             <constraint firstAttribute="trailing" secondItem="dgZ-9h-3g6" secondAttribute="trailing" id="h7q-fk-lFe"/>
@@ -61,12 +75,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="7Nk-Ue-vGh"/>
                     <connections>
-                        <segue destination="WJN-QU-KeS" kind="show" identifier="routeLyrics" id="Lyi-fh-V8q"/>
+                        <segue destination="WJN-QU-KeS" kind="presentation" identifier="routeLyrics" id="Lyi-fh-V8q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ybh-8M-c4r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="871" y="88"/>
+            <point key="canvasLocation" x="870.5607476635513" y="87.473002159827217"/>
         </scene>
         <!--Lyric View Controller-->
         <scene sceneID="IeQ-K9-z3h">
@@ -79,27 +93,43 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exampleLyrics" translatesAutoresizingMaskIntoConstraints="NO" id="8SO-SU-kGc">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ywn-9U-Imi">
+                                <rect key="frame" x="363" y="69" width="50" height="50"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Ca6-ep-bho"/>
+                                    <constraint firstAttribute="height" constant="50" id="yh9-7w-Y7H"/>
+                                </constraints>
+                                <state key="normal" image="arrowshape.turn.up.backward.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="goBackTestAction:" destination="WJN-QU-KeS" eventType="touchUpInside" id="qPK-vY-vJd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h1s-6Y-uTE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ywn-9U-Imi" firstAttribute="top" secondItem="h1s-6Y-uTE" secondAttribute="top" constant="25" id="8Go-hw-V21"/>
                             <constraint firstItem="8SO-SU-kGc" firstAttribute="leading" secondItem="4yQ-bM-BNl" secondAttribute="leading" id="93w-yA-VAM"/>
                             <constraint firstAttribute="bottom" secondItem="8SO-SU-kGc" secondAttribute="bottom" id="J7d-EG-qIp"/>
                             <constraint firstAttribute="trailing" secondItem="8SO-SU-kGc" secondAttribute="trailing" id="JAj-h4-LSU"/>
                             <constraint firstItem="8SO-SU-kGc" firstAttribute="top" secondItem="4yQ-bM-BNl" secondAttribute="top" id="YQ0-Cz-ztl"/>
+                            <constraint firstItem="h1s-6Y-uTE" firstAttribute="trailing" secondItem="Ywn-9U-Imi" secondAttribute="trailing" constant="15" id="b3u-xw-QCC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yQW-XN-QKg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Xu-wb-HBv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1668" y="88"/>
+            <point key="canvasLocation" x="1666.8224299065419" y="87.473002159827217"/>
         </scene>
     </scenes>
     <resources>
         <image name="Splash(1242x2688)" width="414" height="896"/>
+        <image name="arrowshape.turn.up.backward.fill" catalog="system" width="128" height="106"/>
         <image name="exampleLyrics" width="248" height="537"/>
         <image name="examplePlayer" width="248" height="537"/>
+        <image name="rectangle.and.pencil.and.ellipsis" catalog="system" width="128" height="81"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -11,7 +11,18 @@ import UIKit
 class SplashViewController: UIViewController {
     static let limitWaitingTimer: Double = 2.0
     private let image = UIImage(named: "splash")
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Log.debug("request unlogin user Token Key")
+        NetworkManager.share.requestToken(id: "", passworkd: "") { result in
+            switch result{
+            case .success(let tokenKey):
+                Log.info("get success unlogin token - \(tokenKey)")
+            case .failure(let error):
+                Log.warning("fail to get default token - \(error)")
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,7 +33,14 @@ class SplashViewController: UIViewController {
         DispatchQueue.global(qos: .background).async {
             let timer = DispatchTime.now()
             // DO Downloard
-            
+            NetworkManager.share.requestSong { result in
+                switch result {
+                case .success(let songs):
+                    Log.debug("\(songs.first?.singer)")
+                case .failure(let error):
+                    Log.crushOrError("\(error)")
+                }
+            }
             let waitTime: Double = {
                 var diff = DispatchTime.now().seconds() - timer.seconds()
                 if diff < 0.0 { diff = 0.0 }
@@ -30,12 +48,6 @@ class SplashViewController: UIViewController {
                 if result < 0.0 { return 0.0 }
                 return result
             }()
-            
-//            let waiting: DispatchTime = {
-//                let diffnano = DispatchTime.now().uptimeNanoseconds - timer.uptimeNanoseconds
-//                let diff = DispatchTime(uptimeNanoseconds: diffnano < 0 ? 0 : diffnano)
-//                return limitWaitingTimer
-//            }()
             DispatchQueue.main.asyncAfter(
                 deadline: DispatchTime.now() + waitTime) {
                 self.performSegue(withIdentifier: "routePlayer", sender: nil)
@@ -50,7 +62,7 @@ class SplashViewController: UIViewController {
     }
     
     func routeToPlayer() {
-        
+        Log.info("user move to PlayerViewController")
         self.performSegue(withIdentifier: "routePlayer", sender: nil)
     }
 }

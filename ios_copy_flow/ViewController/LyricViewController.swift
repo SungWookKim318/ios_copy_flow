@@ -8,5 +8,9 @@
 import Foundation
 import UIKit
 class LyricViewController: UIViewController {
-    
+    @IBAction func goBackTestAction(_ sender: UIButton) {
+        self.dismiss(animated: true) {
+            Log.info("Ohhhh Yes")
+        }
+    }
 }

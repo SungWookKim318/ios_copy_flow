@@ -9,10 +9,11 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow? = nil
-    
+    var window: UIWindow?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        Log.setup(subsystem: "App", level: .trace)
 
         if #available(iOS 13.0, *) {
             print("Call in SceneDelegate")
@@ -21,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window = UIWindow(frame: UIScreen.main.bounds)
 
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            
+
             window?.rootViewController = storyBoard.instantiateViewController(withIdentifier: "splashViewController")
             window?.makeKeyAndVisible()
         }
