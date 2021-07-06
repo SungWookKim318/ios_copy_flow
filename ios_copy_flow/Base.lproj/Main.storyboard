@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Splash View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="splashViewController" id="BYZ-38-t0r" customClass="SplashViewController" customModule="ios_copy_flow" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash(1242x2688)" translatesAutoresizingMaskIntoConstraints="NO" id="dFx-Fm-KXH">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dFx-Fm-KXH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="OFQ-NN-O3e"/>
+                            <constraint firstAttribute="bottom" secondItem="dFx-Fm-KXH" secondAttribute="bottom" id="SU2-GS-P6B"/>
+                            <constraint firstItem="dFx-Fm-KXH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jdO-Ll-y1F"/>
+                            <constraint firstAttribute="trailing" secondItem="dFx-Fm-KXH" secondAttribute="trailing" id="slC-Ll-Fo1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="WjF-Wu-HI0" kind="show" identifier="routePlayer" id="BYb-Fq-Ah9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="167" y="88"/>
+        </scene>
+        <!--Play View Controller-->
+        <scene sceneID="mX9-ZQ-Hiw">
+            <objects>
+                <viewController storyboardIdentifier="playViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="WjF-Wu-HI0" customClass="PlayViewController" customModule="ios_copy_flow" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2WE-Jf-Oje">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="examplePlayer" translatesAutoresizingMaskIntoConstraints="NO" id="dgZ-9h-3g6">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2Dw-Y6-rfc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dgZ-9h-3g6" firstAttribute="top" secondItem="2WE-Jf-Oje" secondAttribute="top" id="UNn-MT-pZ2"/>
+                            <constraint firstItem="dgZ-9h-3g6" firstAttribute="leading" secondItem="2WE-Jf-Oje" secondAttribute="leading" id="bE4-WT-yUu"/>
+                            <constraint firstAttribute="trailing" secondItem="dgZ-9h-3g6" secondAttribute="trailing" id="h7q-fk-lFe"/>
+                            <constraint firstAttribute="bottom" secondItem="dgZ-9h-3g6" secondAttribute="bottom" id="xyM-48-OS0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="7Nk-Ue-vGh"/>
+                    <connections>
+                        <segue destination="WJN-QU-KeS" kind="show" identifier="routeLyrics" id="Lyi-fh-V8q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ybh-8M-c4r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="871" y="88"/>
+        </scene>
+        <!--Lyric View Controller-->
+        <scene sceneID="IeQ-K9-z3h">
+            <objects>
+                <viewController storyboardIdentifier="lyricViewController" modalPresentationStyle="fullScreen" id="WJN-QU-KeS" customClass="LyricViewController" customModule="ios_copy_flow" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4yQ-bM-BNl">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exampleLyrics" translatesAutoresizingMaskIntoConstraints="NO" id="8SO-SU-kGc">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="h1s-6Y-uTE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8SO-SU-kGc" firstAttribute="leading" secondItem="4yQ-bM-BNl" secondAttribute="leading" id="93w-yA-VAM"/>
+                            <constraint firstAttribute="bottom" secondItem="8SO-SU-kGc" secondAttribute="bottom" id="J7d-EG-qIp"/>
+                            <constraint firstAttribute="trailing" secondItem="8SO-SU-kGc" secondAttribute="trailing" id="JAj-h4-LSU"/>
+                            <constraint firstItem="8SO-SU-kGc" firstAttribute="top" secondItem="4yQ-bM-BNl" secondAttribute="top" id="YQ0-Cz-ztl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="yQW-XN-QKg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Xu-wb-HBv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1668" y="88"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Splash(1242x2688)" width="414" height="896"/>
+        <image name="exampleLyrics" width="248" height="537"/>
+        <image name="examplePlayer" width="248" height="537"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
