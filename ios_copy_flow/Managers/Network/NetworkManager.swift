@@ -41,6 +41,7 @@ class Connectivity {
 }
 enum NetworkError: Error {
     case tokenInvalid
+    case connectInvalid
 }
 // swiftlint:disable all
 class NetworkManager {
@@ -64,23 +65,27 @@ class NetworkManager {
     }
 
 
-    func requestSong(completion: @escaping (Result<[NetworkMusicModel], Error>) -> Void) {
+    func requestSong(completion: @escaping (Result<[MusicModel], Error>) -> Void) {
         if token == nil {
             completion(.failure(NetworkError.tokenInvalid))
         }
         
         request = session.request(APINetworkManager.getSongs)
         request?.responseDecodable(of: NetworkMusicModel.self){ response in
-            guard let song = response.value else {
+            guard let networkModel = response.value else {
                 Log.crushOrError("Fail to get songlist - [\(String(describing: response.error))] \(response)")
                 return
             }
-            completion(.success([song]))
+            guard let songModel = MusicModel(model: networkModel) else {
+                fatalError()
+            }
+            completion(.success([songModel]))
         }
     }
     
-    func downloadFile(url: URL, downloadURL: URL, completion: @escaping () -> Void) {
-        
+    func downloadFile(by url: URL, save: URL, _ completion: @escaping (Result<URL, NetworkError>) -> Void) {
+        fatalError("미구현 기능, 구현해야함")
+        completion(.failure(NetworkError.connectInvalid))
     }
     
     private init() {

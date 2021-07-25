@@ -9,4 +9,13 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+//        didset {
+//            // Darkmode 대응
+//            if #available(iOS 12.0, *) {
+//                ColorManager.share.isDarkMode = window?.traitCollection.userInterfaceStyle == .dark
+//            } else {
+//                ColorManager.share.isDarkMode = false
+//            }
+//        }
+//    }
 }

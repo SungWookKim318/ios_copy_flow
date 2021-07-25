@@ -17,14 +17,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if #available(iOS 13.0, *) {
             print("Call in SceneDelegate")
-        }
-        else {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+
+            ColorManager.share.isDarkMode = window?.traitCollection.userInterfaceStyle == .dark
+        } else {
             self.window = UIWindow(frame: UIScreen.main.bounds)
 
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 
             window?.rootViewController = storyBoard.instantiateViewController(withIdentifier: "splashViewController")
             window?.makeKeyAndVisible()
+            // Darkmode 대응
+            if #available(iOS 12.0, *) {
+                ColorManager.share.isDarkMode = window?.traitCollection.userInterfaceStyle == .dark
+            } else {
+                ColorManager.share.isDarkMode = false
+            }
         }
 
         return true

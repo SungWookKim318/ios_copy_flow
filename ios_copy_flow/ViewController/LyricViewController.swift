@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-class LyricViewController: UIViewController {
+class LyricViewController: BaseViewController {
     @IBAction func goBackTestAction(_ sender: UIButton) {
         self.dismiss(animated: true) {
             Log.info("Ohhhh Yes")
