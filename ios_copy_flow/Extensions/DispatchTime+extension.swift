@@ -9,8 +9,9 @@ import Foundation
 
 extension DispatchTime {
     func seconds() -> Double {
-        return Double(self.uptimeNanoseconds) / 1e9
+        return Double(uptimeNanoseconds) / 1e9
     }
+
     static func makeDispatchTime(bySecond: Double) -> DispatchTime {
         return DispatchTime(uptimeNanoseconds: UInt64(bySecond * 1e9))
     }

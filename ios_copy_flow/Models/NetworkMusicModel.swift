@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct NetworkMusicModel : Codable {
+struct NetworkMusicModel: Codable {
     var singer: String
-    var album : String
-    var title : String
+    var album: String
+    var title: String
     var duration: Int
-    var image : String
-    var file : String
+    var image: String
+    var file: String
     var lyrics: String
 }

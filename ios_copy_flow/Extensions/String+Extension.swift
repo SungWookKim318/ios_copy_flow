@@ -10,7 +10,8 @@ import Foundation
 extension String {
     func extractClassName() -> String {
         guard let fileName = components(separatedBy: "/").last,
-            let className = fileName.components(separatedBy: ".").first else {
+              let className = fileName.components(separatedBy: ".").first
+        else {
             return "No FilePath"
         }
 

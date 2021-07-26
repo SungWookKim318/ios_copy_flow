@@ -11,15 +11,18 @@ enum APINetworkManager {
     private enum Develop {
         static let base = "https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/2020-flo"
     }
+
     private enum Production {
         static let base = "https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/2020-flo"
     }
+
     static let base: String = {
         #if DEBUG
-        return Develop.base
+            return Develop.base
         #else
-        return Production
+            return Production
         #endif
     }()
+
     static let getSongs = base + "/song.json"
 }

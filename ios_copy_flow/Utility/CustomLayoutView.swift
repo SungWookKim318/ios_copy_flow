@@ -14,7 +14,7 @@ class CustomLayoutView: UIView {
     internal func setupAutoLayout() {}
 
     internal func setupRXs() {}
-    
+
     internal func setup() {
         setupSubview()
         setupAutoLayout()

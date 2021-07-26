@@ -16,6 +16,12 @@ enum LyricParseError: Error {
 struct LyricModel {
     let startSeconds: Double
     let text: String
+    func toTimeForat() -> String {
+        let sec = Int(self.startSeconds.truncatingRemainder(dividingBy: 60))
+        let min = Int(self.startSeconds / 60)
+        let ms = Int(Double(round(self.startSeconds * 100) / 100))
+        return "\(min):\(sec).\(ms)"
+    }
 }
 
 extension LyricModel {

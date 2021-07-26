@@ -51,7 +51,7 @@ class AudioPlayerManager {
         guard let asset = currentAsset else { return }
         let newTime = CMTimeMultiplyByFloat64(asset.duration, multiplier: ratio)
         isSeeking = true
-        self.player.seek(to: newTime, toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] _ in
+        player.seek(to: newTime, toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] _ in
             self?.currentTime = newTime
             self?.isSeeking = false
             if needPlay {

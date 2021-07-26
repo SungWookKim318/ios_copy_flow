@@ -15,9 +15,9 @@ class MusicModel {
     init?(model: NetworkMusicModel) {
         networkModel = model
         switch LyricModel.convert(to: model.lyrics as NSString) {
-        case .success(let lyrics):
+        case let .success(lyrics):
             self.lyrics = lyrics
-        case .failure(let error):
+        case let .failure(error):
             print("convert lyric error - \(error)")
             return nil
         }

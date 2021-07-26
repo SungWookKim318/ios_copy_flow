@@ -7,5 +7,4 @@
 
 import Foundation
 
-extension String {
-}
+extension String {}

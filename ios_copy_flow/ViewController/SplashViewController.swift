@@ -16,34 +16,35 @@ class SplashViewController: BaseViewController {
         super.viewWillAppear(animated)
         Log.debug("request unlogin user Token Key")
         NetworkManager.share.requestToken(id: "", passworkd: "") { result in
-            switch result{
-            case .success(let tokenKey):
+            switch result {
+            case let .success(tokenKey):
                 Log.info("get success unlogin token - \(tokenKey)")
-            case .failure(let error):
+            case let .failure(error):
                 Log.warning("fail to get default token - \(error)")
             }
         }
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         #if DEBUG
-        let debugIndicator = UIView(frame: CGRect(x: 30, y: 30, width: 30, height: 30))
-        debugIndicator.backgroundColor = .yellow
-        self.view.addSubview(debugIndicator)
+            let debugIndicator = UIView(frame: CGRect(x: 30, y: 30, width: 30, height: 30))
+            debugIndicator.backgroundColor = .yellow
+            view.addSubview(debugIndicator)
         #endif
 //        if !NetworkManager.share.checkNetwork() {
 //            UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
 //        }
-        
+
         DispatchQueue.global(qos: .background).async {
             let start = DispatchTime.now()
             // DO Downloard
             NetworkManager.share.requestSong { result in
                 switch result {
-                case .success(let songs):
+                case let .success(songs):
 //                    Log.debug("\(songs.first?.networkModel.singer)")
                     PlayListManager.share.pushBack(songs: songs)
-                case .failure(let error):
+                case let .failure(error):
                     Log.crushOrError("\(error)")
                 }
             }
@@ -57,19 +58,20 @@ class SplashViewController: BaseViewController {
             print("waitTime - \(waitTime)")
             DispatchQueue.main.asyncAfter(
                 deadline: DispatchTime.now() + waitTime) {
-                self.performSegue(withIdentifier: "routePlayer", sender: nil)
+                    
+                    self.performSegue(withIdentifier: "routePlayer", sender: nil)
             }
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if segue.identifier == "next" {
             // Nothing to pass
         }
     }
-    
+
     func routeToPlayer() {
         Log.info("user move to PlayerViewController")
-        self.performSegue(withIdentifier: "routePlayer", sender: nil)
+        performSegue(withIdentifier: "routePlayer", sender: nil)
     }
 }

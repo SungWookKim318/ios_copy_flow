@@ -9,11 +9,11 @@ import Foundation
 
 class CacheFileManaer {
     static let share = CacheFileManaer()
-    private init(){}
-    //------------------------------
-    
+    private init() {}
+    // ------------------------------
+
     static let userDocuURL: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     static let cacheFolderName: String = "musiccache"
-    
+
 //    private(set) let cacheDirectory: URL =
 }

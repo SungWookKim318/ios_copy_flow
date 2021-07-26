@@ -6,13 +6,12 @@
 //  Copyright © 2020 김성욱. All rights reserved.
 //
 
-
 import Logging
 import LoggingOSLog
 
 // 로그
 public final class Log {
-    public static var `default`: Logger = Logger(label: "com.swkim.app", factory: LoggingOSLog.init)
+    public static var `default` = Logger(label: "com.swkim.app", factory: LoggingOSLog.init)
 
     public class func setup(subsystem: String, level: Logger.Level = .debug) {
         `default` = Logger(label: subsystem, factory: LoggingOSLog.init)
@@ -55,13 +54,13 @@ public extension Log {
         let className = fileName.extractClassName()
         `default`.critical("\(className):\(functionName) \(message)")
     }
-    
+
     static func crushOrError(_ message: Logger.Message, functionName: String = #function, fileName: String = #file) {
         let className = fileName.extractClassName()
         #if DEBUG
-        fatalError("\(className):\(functionName) \(message)")
+            fatalError("\(className):\(functionName) \(message)")
         #else
-        `default`.error("\(className):\(functionName) \(message)")
+            `default`.error("\(className):\(functionName) \(message)")
         #endif
     }
 }

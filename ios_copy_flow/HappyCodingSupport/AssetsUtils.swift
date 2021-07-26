@@ -1,10 +1,10 @@
 #if os(OSX)
-    typealias Image     = NSImage
+    typealias Image = NSImage
     typealias ImageName = NSImage.Name
 #elseif os(iOS)
     import UIKit
 
-    typealias Image     = UIImage
+    typealias Image = UIImage
     typealias ImageName = String
 #endif
 

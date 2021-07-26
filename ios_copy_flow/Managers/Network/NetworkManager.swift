@@ -39,10 +39,12 @@ class Connectivity {
         return NetworkReachabilityManager()?.isReachable ?? false
     }
 }
+
 enum NetworkError: Error {
     case tokenInvalid
     case connectInvalid
 }
+
 // swiftlint:disable all
 class NetworkManager {
     static let share = NetworkManager()
@@ -50,28 +52,28 @@ class NetworkManager {
     private var reachability: NetworkReachabilityManager!
     private var session: Session!
     private(set) var token: String!
-    
+
     private var request: DataRequest? {
         didSet {
             oldValue?.cancel()
         }
     }
-    
-    func requestToken(id: String = "", passworkd: String = "",
-                      completion: @escaping (Result<String, Error>) -> Void) {
+
+    func requestToken(id _: String = "", passworkd _: String = "",
+                      completion: @escaping (Result<String, Error>) -> Void)
+    {
         // DO Something to get token
         token = "56a52203b90209ff3b16b6b5b48ab64f"
         completion(.success(token))
     }
 
-
     func requestSong(completion: @escaping (Result<[MusicModel], Error>) -> Void) {
         if token == nil {
             completion(.failure(NetworkError.tokenInvalid))
         }
-        
+
         request = session.request(APINetworkManager.getSongs)
-        request?.responseDecodable(of: NetworkMusicModel.self){ response in
+        request?.responseDecodable(of: NetworkMusicModel.self) { response in
             guard let networkModel = response.value else {
                 Log.crushOrError("Fail to get songlist - [\(String(describing: response.error))] \(response)")
                 return
@@ -82,32 +84,31 @@ class NetworkManager {
             completion(.success([songModel]))
         }
     }
-    
-    func downloadFile(by url: URL, save: URL, _ completion: @escaping (Result<URL, NetworkError>) -> Void) {
+
+    func downloadFile(by _: URL, save _: URL, _ completion: @escaping (Result<URL, NetworkError>) -> Void) {
         fatalError("미구현 기능, 구현해야함")
         completion(.failure(NetworkError.connectInvalid))
     }
-    
+
     private init() {
         reachability = NetworkReachabilityManager(host: APINetworkManager.base)
         reachability.startListening { status in
             print("\(status)")
         }
         requestToken { [weak self] result in
-            switch result{
-            case .success(let tokenKey) :
+            switch result {
+            case let .success(tokenKey):
                 Log.info("get token - \(tokenKey)")
                 self?.session = Session(interceptor: self)
-            case .failure(let error):
+            case let .failure(error):
                 Log.info("get Error \(error)")
             }
         }
     }
 }
 
-extension NetworkManager : Alamofire.RequestInterceptor {
-    
-    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+extension NetworkManager: Alamofire.RequestInterceptor {
+    func adapt(_ urlRequest: URLRequest, for _: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         guard token != nil else {
             completion(.failure(NetworkError.tokenInvalid))
             return
@@ -115,7 +116,7 @@ extension NetworkManager : Alamofire.RequestInterceptor {
         // NOTE : ADD Header for token BUT NOT OPERATED........
 //        var urlRequest = urlRequest
 //        urlRequest.setValue(correctToken, forHTTPHeaderField: "Authorization")
-        
+
         completion(.success(urlRequest))
     }
 }
