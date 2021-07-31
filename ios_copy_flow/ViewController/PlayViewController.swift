@@ -259,12 +259,24 @@ class PlayViewController: BaseViewController {
                 AudioPlayerManager.share.stopPlayer()
                 playButton.isSelected = false
             }.disposed(by: disposeBag)
+        audioSeekBar.rx.value
+                    .asDriver()
+                    .distinctUntilChanged()
+                    .throttle(.milliseconds(500))
+                    .filter { _ in
+                        !AudioPlayerManager.share.isSeeking
+                    }
+                    .drive(with: audioController.playButton, onNext: { playButton, newValue in
+                        AudioPlayerManager.share.seekTo(ratio: Double(newValue), needPlay: playButton.isSelected)
+                    }).disposed(by: disposeBag)
     }
     
     func setup() {
         setupSubviews()
         setupAutoLayout()
         setupRx()
+        
+        AudioPlayerManager.share.delegate = self
     }
     
     // MARK: Routers
@@ -281,4 +293,20 @@ class PlayViewController: BaseViewController {
 
 extension PlayViewController {
     override var prefersStatusBarHidden: Bool { false }
+}
+
+
+extension PlayViewController: AudioPlayerDelegate {
+    func PresentTimerChanged(seconds: Double) {
+        if let duration = AudioPlayerManager.share.duration {
+            DispatchQueue.main.async { [weak self] in
+                let newPTS = Float(seconds / duration)
+                self?.audioSeekBar.value = Float(seconds / duration)
+                Log.trace("Audio Player new pts = \(newPTS)")
+            }
+        } else {
+            audioSeekBar.rx.value.on(.next(0))
+            audioController.playButton.isSelected = false
+        }
+    }
 }
