@@ -262,9 +262,16 @@ class PlayViewController: BaseViewController {
         audioSeekBar.rx.value
                     .asDriver()
                     .distinctUntilChanged()
-                    .throttle(.milliseconds(500))
+                    .throttle(.milliseconds(1000))
                     .filter { _ in
-                        !AudioPlayerManager.share.isSeeking
+                        print("!AudioPlayerManager.share.isSeeking - \(!AudioPlayerManager.share.isSeeking)")
+                        if AudioPlayerManager.share.isLoaded {
+                            if  !AudioPlayerManager.share.isSeeking {
+                                return true
+                            }
+                        }
+                        return false
+//                        return !AudioPlayerManager.share.isSeeking
                     }
                     .drive(with: audioController.playButton, onNext: { playButton, newValue in
                         AudioPlayerManager.share.seekTo(ratio: Double(newValue), needPlay: playButton.isSelected)
@@ -303,6 +310,7 @@ extension PlayViewController: AudioPlayerDelegate {
                 let newPTS = Float(seconds / duration)
                 self?.audioSeekBar.value = Float(seconds / duration)
                 Log.trace("Audio Player new pts = \(newPTS)")
+//                self?.lyricView.currentTime = seconds
             }
         } else {
             audioSeekBar.rx.value.on(.next(0))

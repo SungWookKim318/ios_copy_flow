@@ -48,10 +48,19 @@ class AudioPlayerManager {
     }
 
     func seekTo(ratio: Double, needPlay: Bool) {
-        guard let asset = currentAsset else { return }
+        guard let asset = currentAsset else {
+            Log.warning("asset is not ready")
+            return
+        }
         let newTime = CMTimeMultiplyByFloat64(asset.duration, multiplier: ratio)
+        let tolerance = CMTimeMakeWithSeconds(0.01, preferredTimescale: 600)
         isSeeking = true
-        player.seek(to: newTime, toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] _ in
+        player.seek(to: newTime, toleranceBefore: tolerance, toleranceAfter: tolerance) { [weak self] isFinishedSeek in
+            if isFinishedSeek == false {
+                self?.isSeeking = true
+                return
+            }
+            Log.info("Seeking is finished")
             self?.currentTime = newTime
             self?.isSeeking = false
             if needPlay {
@@ -63,7 +72,13 @@ class AudioPlayerManager {
     // Public Variables
     weak var delegate: AudioPlayerDelegate?
     var duration: Double? { currentAsset?.duration.seconds }
-    var isLoaded: Bool { currentAsset != nil }
+    private var loadedObserver = false
+    var isLoaded: Bool {
+        if currentAsset != nil {
+            return true
+        }
+        return false
+    }
     private(set) var isSeeking: Bool = false
     var currentItem: URL? {
         didSet {
@@ -106,7 +121,18 @@ class AudioPlayerManager {
 
     // private nextItem: URL?
     private var currentAsset: AVAsset?
-    private var player = AVPlayer()
+    private var player: AVPlayer = {
+        let player = AVPlayer()
+//        _ = player.observe(\.status, options: [.old, .new]) { (object, change) in
+//            if let newValue = change.newValue {
+//                print("player KVO status is change to \(change.newValue)")
+//                if newValue == .readyToPlay {
+//                    AudioPlayerManager.share.loadedObserver = true
+//                }
+//            }
+//        }
+        return player
+    }()
     private var currentTime: CMTime?
 
     private init() {
